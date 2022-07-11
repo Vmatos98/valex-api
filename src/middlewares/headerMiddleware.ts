@@ -1,11 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 
 async function keyValidator(req: Request, res: Response, next: NextFunction) {
-    const key = req.headers["x-api-key"].toString();
+    const key = req.headers["x-api-key"];
     if (!key) {
-        return res.send("Header is required").status(401);
+        throw { status: 400, message: "Header is required" };
     }
-    console.log(key);
     res.locals.key = key;
     next();
 }
