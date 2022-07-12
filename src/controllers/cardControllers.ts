@@ -11,8 +11,8 @@ async function createCard(req: Request, res: Response){
         throw {status: 400, message: error.details[0].message};
     }
     const companyData = await company.checkCompany(key);
-    await cardServices.createCard(req.body.type, req.body.employeeId, companyData.id);
-    return res.send('Card created').status(201);
+    const result = await cardServices.createCard(req.body.type, req.body.employeeId, companyData.id);
+    return res.status(201).send(result);
 }
 
 async function activateCard(req: Request, res: Response){

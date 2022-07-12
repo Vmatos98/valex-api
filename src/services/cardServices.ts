@@ -31,8 +31,12 @@ async function createCard(type: cardRepository.TransactionTypes, employeeId: num
     };
     // console.log(card);
     console.log(cryptr.decrypt(card.securityCode));
-    return await cardRepository.insert(card);
-    
+    await cardRepository.insert(card);
+    return { 
+        number: card.number,
+        cardholderName: card.cardholderName,
+        type: card.type
+    }
 }
 
 async function activateCard(cvc: string, password: string, cardId: number) {

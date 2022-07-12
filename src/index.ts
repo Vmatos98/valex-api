@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 import errorHandler from "./middlewares/errorHandlerMiddleware.js";
 import cardRoutes from "./routes/cardRoutes.js";
-
+import financialRoutes from "./routes/financialRoutes.js";
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(cors());
 app.use(json());
-app.use(cardRoutes);
+app.use(cardRoutes).use(financialRoutes);
 app.use(errorHandler);
 
 

@@ -16,8 +16,22 @@ const validateCardSchema = joi.object({
     password: joi.string().length(4).required(),
 });
 
+const rechargeSchema = joi.object({
+    amount: joi.number().min(1).required(),
+    cardId: joi.number().required()
+});
+
+const purchasesSchema = joi.object({
+    cardId: joi.number().required(),
+    amount: joi.number().min(1).required(),
+    password: joi.string().length(4).required(),
+    businessId: joi.number().required()
+})
+
 export { 
     createCardSchema,
     activateCardSchema,
-    validateCardSchema
+    validateCardSchema,
+    rechargeSchema,
+    purchasesSchema
 }

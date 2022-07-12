@@ -17,6 +17,15 @@ export async function findByCardId(cardId: number) {
   return result.rows;
 }
 
+export async function sumAmountByCardId(cardId: number) {
+  const result = await connection.query(
+    `SELECT SUM("amount") FROM recharges WHERE "cardId"=$1`,
+    [cardId]
+  );
+
+  return result.rows[0];
+}
+
 export async function insert(rechargeData: RechargeInsertData) {
   const { cardId, amount } = rechargeData;
 

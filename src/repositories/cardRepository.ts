@@ -25,9 +25,17 @@ export interface Card {
 export type CardInsertData = Omit<Card, "id">;
 export type CardUpdateData = Partial<Card>;
 
-export async function find() {
+export async function findAll() {
   const result = await connection.query<Card>("SELECT * FROM cards");
   return result.rows;
+}
+
+export async function findByCardNumber(cardNumber: string) {
+  const result = await connection.query<Card>(
+    `SELECT * FROM cards WHERE number = $1`,
+    [cardNumber]
+  );
+  return result.rows[0];
 }
 
 export async function findById(id: number) {
