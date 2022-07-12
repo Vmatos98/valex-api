@@ -35,6 +35,7 @@ async function createCard(type: cardRepository.TransactionTypes, employeeId: num
     return { 
         number: card.number,
         cardholderName: card.cardholderName,
+        securityCode: cryptr.decrypt(card.securityCode),
         type: card.type
     }
 }

@@ -8,7 +8,10 @@ async function createCard(req: Request, res: Response){
     const key = res.locals.key;
     const { error } = validate.createCardSchema.validate(req.body);
     if (error) {
+        console.log(error.details[0].message);
+        
         throw {status: 400, message: error.details[0].message};
+        
     }
     const companyData = await company.checkCompany(key);
     const result = await cardServices.createCard(req.body.type, req.body.employeeId, companyData.id);
